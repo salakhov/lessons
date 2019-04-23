@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 
-public class BubbleSort implements iSort{
+public class BubbleSort implements Sort {
 
     private ArrayList<Person> persons;
     private long startTime;

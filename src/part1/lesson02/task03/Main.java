@@ -15,6 +15,15 @@ package part1.lesson02.task03;
  * Если имена людей и возраст совпадают, выбрасывать в программе пользовательское исключение.
  */
 
+/* замечания от 23.04.2019
+1. реализовать интерфейс в классе Person унаследовать его от Comparable
+2. переименовать интерфейс iSort в соответствии c JavaCodeConversion
+3. В функциях применять примитив (не ArrayList а List)
+4. Отсортировать сначала мужчины, потом по старшенству, потом по возрасту, а не один массив несколько раз сортировать
+5. выбрасывать исключение в методе generate
+6. использовать массив а не коллекцию. Возможно массив сортировать методами arrays - sort.
+ */
+
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -24,8 +33,8 @@ public class Main {
         public static void main(String[] args) {
             // отключаем trim сортировку, на java 1.8.0.131 глючит сортировка Collections.sort
             System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-            iSort bubbleSort = new BubbleSort();
-            iSort quickSort = new QuickSort();
+            Sort bubbleSort = new BubbleSort();
+            Sort quickSort = new QuickSort();
 
             generatePersonArray();
             System.out.println("[DEBUG] ************ Исходный массив**********");

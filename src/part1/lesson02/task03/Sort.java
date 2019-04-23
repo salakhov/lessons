@@ -5,7 +5,7 @@ import java.util.ArrayList;
 /**
  * Единый Интерфейс для классов сортировки
  */
-interface iSort {
+interface Sort {
     void SortManFirst(ArrayList<Person> persons);
     void SortAgeMax(ArrayList<Person> persons);
     void SortAlfabetName(ArrayList<Person> persons);

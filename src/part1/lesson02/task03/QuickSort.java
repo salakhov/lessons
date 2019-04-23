@@ -9,7 +9,7 @@ import java.util.Comparator;
  * Сортировка выполняется методом merge
  */
 
-public class QuickSort implements iSort {
+public class QuickSort implements Sort {
     public QuickSort() {
         this.algNameText = "Сортировка методом merge (встроенные средсва Java)";
     }
