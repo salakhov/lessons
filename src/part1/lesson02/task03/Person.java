@@ -7,7 +7,7 @@ package part1.lesson02.task03;
  * name (имя - строка).
  */
 
-public class Person {
+class Person {
     private Integer age;
     private String sex;
     private String name;
@@ -28,4 +28,9 @@ public class Person {
         this.sex = sex;
         this.name = name;
     }
+
+    //@Override
+    //public int compareTo(Object o) {
+    //    return 0;
+    //}
 }

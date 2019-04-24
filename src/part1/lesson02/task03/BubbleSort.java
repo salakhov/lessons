@@ -7,9 +7,9 @@ import java.util.ArrayList;
  */
 
 
-public class BubbleSort implements Sort {
+class BubbleSort implements Sort {
 
-    private ArrayList<Person> persons;
+    private Person [] persons;
     private long startTime;
     private long endTime;
     private String algNameText;
@@ -23,12 +23,12 @@ public class BubbleSort implements Sort {
      * @param persons - список объектов person
      */
     @Override
-    public void SortManFirst(ArrayList<Person> persons){
+    public void SortManFirst(Person [] persons){
         this.persons = persons;
         startTime = System.currentTimeMillis();
-        for (int out = this.persons.size() - 1; out >= 1; out--){
+        for (int out = this.persons.length - 1; out >= 1; out--){
             for (int in = 0; in < out; in++){
-                int result = this.persons.get(in).getSex().compareTo("MAN");
+                int result = this.persons[in].getSex().compareTo("MAN");
                 if(result != 0)
                     toSwap(in, in+1);
             }
@@ -42,12 +42,12 @@ public class BubbleSort implements Sort {
      * @param persons - список объектов person
      */
     @Override
-    public void SortAgeMax(ArrayList<Person> persons){
+    public void SortAgeMax(Person [] persons){
         this.persons = persons;
         startTime = System.currentTimeMillis();
-        for (int out = this.persons.size() - 1; out >= 1; out--){
+        for (int out = this.persons.length - 1; out >= 1; out--){
             for (int in = 0; in < out; in++){
-                if(this.persons.get(in).getAge() < this.persons.get(in+1).getAge())
+                if(this.persons[in].getAge() < this.persons[in+1].getAge())
                     toSwap(in, in+1);
             }
         }
@@ -60,12 +60,12 @@ public class BubbleSort implements Sort {
      * @param persons - список объектов person
      */
     @Override
-    public void SortAlfabetName(ArrayList<Person> persons) {
+    public void SortAlfabetName(Person [] persons) {
         this.persons = persons;
         startTime = System.currentTimeMillis();
-        for (int out = this.persons.size() - 1; out >= 1; out--){
+        for (int out = this.persons.length - 1; out >= 1; out--){
             for (int in = 0; in < out; in++){
-                int result = this.persons.get(in).getName().compareTo(this.persons.get(in+1).getName());
+                int result = this.persons[in].getName().compareTo(this.persons[in+1].getName());
                 if(result > 0)
                     toSwap(in, in+1);
             }
@@ -79,9 +79,9 @@ public class BubbleSort implements Sort {
      * @param first,second  - индексы элементов в массиве которые надо поменять
      */
     private void toSwap(int first, int second){
-        Person dummy = persons.get(first);
-        persons.set(first,persons.get(second));
-        persons.set(second,dummy);
+        Person dummy = persons[first];
+        persons[first] = persons[second];
+        persons[second] = dummy;
     }
 
     /**

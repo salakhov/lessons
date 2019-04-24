@@ -1,6 +1,7 @@
 package part1.lesson02.task03;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 
@@ -23,18 +24,16 @@ public class QuickSort implements Sort {
      * @param persons - список объектов person
      */
     @Override
-    public void SortManFirst(ArrayList<Person> persons){
+    public void SortManFirst(Person[] persons){
         startTime = System.currentTimeMillis();
-        Collections.sort(persons, new Comparator<Person>() {
+        Arrays.sort(persons, new Comparator<Person>() {
             public int compare(Person o1, Person o2) {
-                if (o1.getSex().compareTo("MAN")==0)
+                if (o1.getSex().compareTo("WOMAN")==0)
                     return 1;
                 else
                     return -1;
             }
         });
-        //массив отсортирован, но Woman идет впереди. Нужен обратный порядок
-        Collections.reverse(persons);
         endTime = System.currentTimeMillis();
         printSortTime("первые идут мужчины");
     }
@@ -44,9 +43,9 @@ public class QuickSort implements Sort {
      * @param persons - список объектов person
      */
     @Override
-    public void SortAgeMax(ArrayList<Person> persons){
+    public void SortAgeMax(Person[] persons){
         startTime = System.currentTimeMillis();
-        Collections.sort(persons, new Comparator<Person>() {
+        Arrays.sort(persons, new Comparator<Person>() {
             public int compare(Person o1, Person o2) {
                 return o2.getAge()-o1.getAge();
             }
@@ -60,9 +59,9 @@ public class QuickSort implements Sort {
      * @param persons - список объектов person
      */
     @Override
-    public void SortAlfabetName(ArrayList<Person> persons){
+    public void SortAlfabetName(Person[] persons){
         startTime = System.currentTimeMillis();
-        Collections.sort(persons, new Comparator<Person>() {
+        Arrays.sort(persons, new Comparator<Person>() {
             public int compare(Person o1, Person o2) {
                 return o1.getName().compareTo(o2.getName());
             }

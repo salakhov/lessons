@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Единый Интерфейс для классов сортировки
  */
 interface Sort {
-    void SortManFirst(ArrayList<Person> persons);
-    void SortAgeMax(ArrayList<Person> persons);
-    void SortAlfabetName(ArrayList<Person> persons);
+    void SortManFirst(Person[] persons);
+    void SortAgeMax(Person[] persons);
+    void SortAlfabetName(Person[] persons);
 }
