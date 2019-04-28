@@ -15,51 +15,42 @@ package part1.lesson02.task03;
  * Если имена людей и возраст совпадают, выбрасывать в программе пользовательское исключение.
  */
 
-/* замечания от 23.04.2019
-1. реализовать интерфейс в классе Person унаследовать его от Comparable
-2. переименовать интерфейс iSort в соответствии c JavaCodeConversion
-3. В функциях применять примитив (не ArrayList а List)
-4. Отсортировать сначала мужчины, потом по старшенству, потом по возрасту, а не один массив несколько раз сортировать
-5. выбрасывать исключение в методе generate
-6. использовать массив а не коллекцию. Возможно массив сортировать методами arrays - sort.
- */
+// замечания от 23.04.2019
+//1. DONE реализовать интерфейс в классе Person унаследовать его от Comparable
+//2. DONE переименовать интерфейс iSort в соответствии c JavaCodeConversion
+//3. DONE В функциях применять примитив (не ArrayList а List) (заменено на Persons [])
+//4. DONE Отсортировать сначала мужчины, потом по старшенству, потом по возрасту, а не один массив несколько раз сортировать
+//5. DONE выбрасывать исключение в методе generate
+//6. DONE использовать массив а не коллекцию. Возможно массив сортировать методами arrays - sort.
 
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
-    private static ArrayList<Person> personArray;
+    private static Person[] personArray;
 
         public static void main(String[] args) {
             // отключаем trim сортировку, на java 1.8.0.131 глючит сортировка Collections.sort
             System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
             Sort bubbleSort = new BubbleSort();
             Sort quickSort = new QuickSort();
+            try {
+                generatePersonArray();
+            }
+            catch  (CustomException err){
+                err.printStackTrace();
+            }
 
-            generatePersonArray();
             System.out.println("[DEBUG] ************ Исходный массив**********");
             printPersons();
 
-            //System.out.println("[DEBUG] ************ Сортировка методом пузырька. По возрасту**********");
-            bubbleSort.SortAgeMax(personArray);
-            //printPersons();
-            //System.out.println("[DEBUG] ************ Сортировка методом пузырька. По арфавиту**********");
-            bubbleSort.SortAlfabetName(personArray);
-            //printPersons();
-            //System.out.println("[DEBUG] ************ Сортировка методом пузырька. Мужчины первые**********");
-            bubbleSort.SortManFirst(personArray);
-            //printPersons();
+            System.out.println("[DEBUG] ************ Сортировка методом merge. **********");
+            quickSort.Sort(personArray);
+            printPersons();
 
-            //System.out.println("[DEBUG] ************ Сортировка методом merge. По возрасту**********");
-            quickSort.SortAgeMax(personArray);
-            //printPersons();
-            //System.out.println("[DEBUG] ************ Сортировка методом merge. По алфавиту**********");
-            quickSort.SortAlfabetName(personArray);
-            //printPersons();
-            //System.out.println("[DEBUG] ************ Сортировка методом merge. Мужчины первые**********");
-            quickSort.SortManFirst(personArray);
-            //printPersons();
-    }
+            System.out.println("[DEBUG] ************ Сортировка методом пузырька.**********");
+            bubbleSort.Sort(personArray);
+            printPersons();
+        }
 
     /**
      * Функция заполнения массива списка с объектами Persons
@@ -67,27 +58,31 @@ public class Main {
      * Пол формируется случайным выбором из справочника полов
      * возраст генерируется случайным образом
      */
-    static void generatePersonArray() {
-        personArray = new ArrayList<Person>();
+    private static void generatePersonArray() throws CustomException {
+        personArray = new Person[10000];
 
         Random rnd = new Random();
         String[] firstnames = {"Mikhail", "Vasiliy", "Dmitry", "Igor", "Lena", "Anya","Ktya","Julia"};
         String[] lastnames = {"Salakhov", "Ivanov", "Petrov", "Dreama", "Peprbyf","Bashirov","Vasechkin"};
         String[] sexs = {"MAN", "WOMAN"};
 
-        for (int i = 0; i < 10000; i++) {
+        for (int i = 0; i < personArray.length; i++) {
             String name = firstnames[rnd.nextInt(firstnames.length-1)] + " " + lastnames[rnd.nextInt(firstnames.length-1)];
             String sex = sexs[rnd.nextInt(sexs.length)];
-            Integer age = rnd.nextInt(100);
+            Integer age = rnd.nextInt(5);
             Person person = new Person(age, sex, name);
-            personArray.add(person);
+            personArray[i] =person;
+        }
+        for (int i = 0; i < personArray.length; i++) {
+            if (personArray[i].getName().compareTo(personArray[i].getName())==0)
+                throw new CustomException("Найдено совпадение имени и фамилии");
         }
     }
 
     /**
      * Функция печати списка объектов person
      */
-    static void printPersons(){
+    private static void printPersons(){
         for (Person person:personArray) {
             System.out.println("[DEBUG] name " + person.getName() +
                     " sex: " + person.getSex() +

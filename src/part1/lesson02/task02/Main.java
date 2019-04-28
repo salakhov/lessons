@@ -17,10 +17,10 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         Random random = new Random();
-        //TODO -- double[] random = {-4, 5.6, 9, 6, 5, 6, 7, 1, 2, 8};
-        Double[] array = new Double[50];
+        //double[] random = {4, 5.6, 9, 6, 5, 6, 7, 1, 2, 8};
+        Double[] array = new Double[10];
         for (int i = 0; i < array.length; i++) {
-            //TODO -- array[i] = random[i];
+            //array[i] = random[i];
             array[i] = random.nextDouble();
         }
         for (Double aDouble : array) {
@@ -36,17 +36,17 @@ public class Main {
      * Функция отображения корня чисел.
      * Если в массиве есть отрицательное число - выбрасывается исключение
      * Если квадрат корня числа равен самому числу - печать
-     * @param array - массив случайных чисел
+     * @param number - массив случайных чисел
      */
     private static void calculateSqrt(Double number) throws NegativeNumberException {
-        double sqr;
+        Double sqr;
         if (number < 0) {
             String msg = "Значение числа " + number + " меньше 0 " + " корень не вычисляется";
             throw new NegativeNumberException(msg);
         }
         sqr = Math.sqrt(number);
-        // TODO ---- DELETE System.out.println("Корень " + number + " равен " + sqr);
-        if (number == Math.pow(sqr, 2)) {
+        //System.out.println("Корень " + number + " равен " + sqr);
+        if (number == Math.pow(sqr.intValue(), 2)) {
             System.out.println("Квадрат " + sqr + " равен " + number);
         }
     }
