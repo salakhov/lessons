@@ -1,5 +1,10 @@
 package part1.lesson02.task03;
 
+/**
+ * Класс реализации пользовательского исключения
+ */
+
+
 public class CustomException extends Exception {
 
         private String msg;

@@ -1,9 +1,5 @@
 package part1.lesson02.task03;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 
 /**
  * Класс реализующий методы сортировки с использованием системных библиотек Java

@@ -23,8 +23,6 @@ package part1.lesson02.task03;
 //5. DONE выбрасывать исключение в методе generate
 //6. DONE использовать массив а не коллекцию. Возможно массив сортировать методами arrays - sort.
 
-
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {

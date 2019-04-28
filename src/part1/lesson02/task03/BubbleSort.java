@@ -29,6 +29,11 @@ class BubbleSort implements Sort {
         persons[second] = dummy;
     }
 
+    /**
+     * Метод сортировки. Сначала сортирется массив по принципу первыми мужчины, потом по возрасту. Затем по алфавиту
+     * @param persons
+     */
+
     @Override
     public void Sort(Person[] persons) {
         this.persons = persons;
