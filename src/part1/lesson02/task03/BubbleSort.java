@@ -18,61 +18,6 @@ class BubbleSort implements Sort {
         this.algNameText = "Сортировка методом пузырька";
     }
 
-    /**
-     * Сортировка методом пузырька по принципу первыми идут мужчины
-     * @param persons - список объектов person
-     */
-    @Override
-    public void SortManFirst(Person [] persons){
-        this.persons = persons;
-        startTime = System.currentTimeMillis();
-        for (int out = this.persons.length - 1; out >= 1; out--){
-            for (int in = 0; in < out; in++){
-                int result = this.persons[in].getSex().compareTo("MAN");
-                if(result != 0)
-                    toSwap(in, in+1);
-            }
-        }
-        endTime = System.currentTimeMillis();
-        printSortTime("первые идут мужчины");
-    }
-
-    /**
-     * Сортировка методом пузырька по убыванию возраста
-     * @param persons - список объектов person
-     */
-    @Override
-    public void SortAgeMax(Person [] persons){
-        this.persons = persons;
-        startTime = System.currentTimeMillis();
-        for (int out = this.persons.length - 1; out >= 1; out--){
-            for (int in = 0; in < out; in++){
-                if(this.persons[in].getAge() < this.persons[in+1].getAge())
-                    toSwap(in, in+1);
-            }
-        }
-        endTime = System.currentTimeMillis();
-        printSortTime("выше в списке тот, кто более старший");
-    }
-
-    /**
-     * Сортировка методом пузырька по алфавиту
-     * @param persons - список объектов person
-     */
-    @Override
-    public void SortAlfabetName(Person [] persons) {
-        this.persons = persons;
-        startTime = System.currentTimeMillis();
-        for (int out = this.persons.length - 1; out >= 1; out--){
-            for (int in = 0; in < out; in++){
-                int result = this.persons[in].getName().compareTo(this.persons[in+1].getName());
-                if(result > 0)
-                    toSwap(in, in+1);
-            }
-        }
-        endTime = System.currentTimeMillis();
-        printSortTime("имена сортируются по алфавиту");
-    }
 
     /**
      * Функция перестановки элементов в списке с заданными индексами
@@ -82,6 +27,32 @@ class BubbleSort implements Sort {
         Person dummy = persons[first];
         persons[first] = persons[second];
         persons[second] = dummy;
+    }
+
+    @Override
+    public void Sort(Person[] persons) {
+        this.persons = persons;
+        startTime = System.currentTimeMillis();
+        for (int out = this.persons.length - 1; out >= 1; out--){
+            for (int in = 0; in < out; in++){
+                if(this.persons[in].getSex()==this.persons[in+1].getSex()) {
+                    if (this.persons[in].getAge() < this.persons[in + 1].getAge())
+                        toSwap(in, in + 1);
+                    if (this.persons[in].getAge() == this.persons[in + 1].getAge()) {
+                        int result = this.persons[in].getName().compareTo(this.persons[in + 1].getName());
+                        if (result > 0)
+                            toSwap(in, in + 1);
+                    }
+                }
+                else{
+                    if(this.persons[in].getSex().compareTo("MAN")!=0){
+                        toSwap(in, in + 1);
+                    }
+                }
+            }
+        }
+        endTime = System.currentTimeMillis();
+        printSortTime("ПОлная сортировки");
     }
 
     /**

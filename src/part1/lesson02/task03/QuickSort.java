@@ -19,55 +19,12 @@ public class QuickSort implements Sort {
     private long startTime;         //время начала сортировки
     private long endTime;           //время оконания сортировки
 
-    /**
-     * Сортировка методом пузырька по принципу первыми идут мужчины
-     * @param persons - список объектов person
-     */
     @Override
-    public void SortManFirst(Person[] persons){
+    public void Sort(Person[] persons) {
         startTime = System.currentTimeMillis();
-        Arrays.sort(persons, new Comparator<Person>() {
-            public int compare(Person o1, Person o2) {
-                if (o1.getSex().compareTo("WOMAN")==0)
-                    return 1;
-                else
-                    return -1;
-            }
-        });
+        Arrays.sort(persons);
         endTime = System.currentTimeMillis();
-        printSortTime("первые идут мужчины");
-    }
-
-    /**
-     * Сортировка методом пузырька по убыванию возраста
-     * @param persons - список объектов person
-     */
-    @Override
-    public void SortAgeMax(Person[] persons){
-        startTime = System.currentTimeMillis();
-        Arrays.sort(persons, new Comparator<Person>() {
-            public int compare(Person o1, Person o2) {
-                return o2.getAge()-o1.getAge();
-            }
-        });
-        endTime = System.currentTimeMillis();
-        printSortTime("выше в списке тот, кто более старший");
-    }
-
-    /**
-     * Сортировка методом пузырька по алфавиту
-     * @param persons - список объектов person
-     */
-    @Override
-    public void SortAlfabetName(Person[] persons){
-        startTime = System.currentTimeMillis();
-        Arrays.sort(persons, new Comparator<Person>() {
-            public int compare(Person o1, Person o2) {
-                return o1.getName().compareTo(o2.getName());
-            }
-        });
-        endTime = System.currentTimeMillis();
-        printSortTime("имена сортируются по алфавиту");
+        printSortTime("Сначала мужчины, потом возраст, потом по алфавиту");
     }
 
     private void printSortTime(String algText){

@@ -16,10 +16,10 @@ package part1.lesson02.task03;
  */
 
 // замечания от 23.04.2019
-//1. TODO реализовать интерфейс в классе Person унаследовать его от Comparable
+//1. DONE реализовать интерфейс в классе Person унаследовать его от Comparable
 //2. DONE переименовать интерфейс iSort в соответствии c JavaCodeConversion
 //3. DONE В функциях применять примитив (не ArrayList а List) (заменено на Persons [])
-//4. TODO Отсортировать сначала мужчины, потом по старшенству, потом по возрасту, а не один массив несколько раз сортировать
+//4. DONE Отсортировать сначала мужчины, потом по старшенству, потом по возрасту, а не один массив несколько раз сортировать
 //5. TODO выбрасывать исключение в методе generate
 //6. DONE использовать массив а не коллекцию. Возможно массив сортировать методами arrays - sort.
 
@@ -40,26 +40,14 @@ public class Main {
             System.out.println("[DEBUG] ************ Исходный массив**********");
             printPersons();
 
-            System.out.println("[DEBUG] ************ Сортировка методом пузырька. По возрасту**********");
-            bubbleSort.SortAgeMax(personArray);
-            printPersons();
-            System.out.println("[DEBUG] ************ Сортировка методом пузырька. По арфавиту**********");
-            bubbleSort.SortAlfabetName(personArray);
-            printPersons();
-            System.out.println("[DEBUG] ************ Сортировка методом пузырька. Мужчины первые**********");
-            bubbleSort.SortManFirst(personArray);
+            System.out.println("[DEBUG] ************ Сортировка методом merge. **********");
+            quickSort.Sort(personArray);
             printPersons();
 
-            System.out.println("[DEBUG] ************ Сортировка методом merge. По возрасту**********");
-            quickSort.SortAgeMax(personArray);
+            System.out.println("[DEBUG] ************ Сортировка методом пузырька.**********");
+            bubbleSort.Sort(personArray);
             printPersons();
-            System.out.println("[DEBUG] ************ Сортировка методом merge. По алфавиту**********");
-            quickSort.SortAlfabetName(personArray);
-            printPersons();
-            System.out.println("[DEBUG] ************ Сортировка методом merge. Мужчины первые**********");
-            quickSort.SortManFirst(personArray);
-            printPersons();
-    }
+        }
 
     /**
      * Функция заполнения массива списка с объектами Persons
@@ -78,7 +66,7 @@ public class Main {
         for (int i = 0; i < personArray.length; i++) {
             String name = firstnames[rnd.nextInt(firstnames.length-1)] + " " + lastnames[rnd.nextInt(firstnames.length-1)];
             String sex = sexs[rnd.nextInt(sexs.length)];
-            Integer age = rnd.nextInt(100);
+            Integer age = rnd.nextInt(5);
             Person person = new Person(age, sex, name);
             personArray[i] =person;
         }
