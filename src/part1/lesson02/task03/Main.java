@@ -20,7 +20,7 @@ package part1.lesson02.task03;
 //2. DONE переименовать интерфейс iSort в соответствии c JavaCodeConversion
 //3. DONE В функциях применять примитив (не ArrayList а List) (заменено на Persons [])
 //4. DONE Отсортировать сначала мужчины, потом по старшенству, потом по возрасту, а не один массив несколько раз сортировать
-//5. TODO выбрасывать исключение в методе generate
+//5. DONE выбрасывать исключение в методе generate
 //6. DONE использовать массив а не коллекцию. Возможно массив сортировать методами arrays - sort.
 
 
@@ -35,8 +35,13 @@ public class Main {
             System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
             Sort bubbleSort = new BubbleSort();
             Sort quickSort = new QuickSort();
+            try {
+                generatePersonArray();
+            }
+            catch  (CustomException err){
+                err.printStackTrace();
+            }
 
-            generatePersonArray();
             System.out.println("[DEBUG] ************ Исходный массив**********");
             printPersons();
 
@@ -55,7 +60,7 @@ public class Main {
      * Пол формируется случайным выбором из справочника полов
      * возраст генерируется случайным образом
      */
-    private static void generatePersonArray() {
+    private static void generatePersonArray() throws CustomException {
         personArray = new Person[10000];
 
         Random rnd = new Random();
@@ -69,6 +74,10 @@ public class Main {
             Integer age = rnd.nextInt(5);
             Person person = new Person(age, sex, name);
             personArray[i] =person;
+        }
+        for (int i = 0; i < personArray.length; i++) {
+            if (personArray[i].getName().compareTo(personArray[i].getName())==0)
+                throw new CustomException("Найдено совпадение имени и фамилии");
         }
     }
 
