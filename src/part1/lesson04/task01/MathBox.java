@@ -1,13 +1,11 @@
 package part1.lesson04.task01;
 
 //import java.util.ArrayList;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Set;
+import javax.print.attribute.standard.NumberUp;
+import java.util.*;
 
 public class MathBox {
-    private HashSet collection = new HashSet<Number>();
+    private HashSet<Number> collection = new HashSet();
 
     /**
      *  * Конструктор на вход получает массив Number. Элементы не могут повторяться. Элементы массива внутри объекта
@@ -20,7 +18,7 @@ public class MathBox {
     }
 
     public void printCollection(){
-        Iterator<Number> it = collection.iterator();
+        Iterator it = collection.iterator();
         while(it.hasNext())
             System.out.println(it.next());
 
@@ -33,7 +31,7 @@ public class MathBox {
         Iterator<Number> it = collection.iterator();
         Integer sum=0;
         while(it.hasNext())
-            sum=it.next().intValue()+sum;
+            sum=it.next().intValue()/sum;
         return sum;
     }
 
@@ -43,12 +41,11 @@ public class MathBox {
      * @param num
      */
     public void splitter(int num){
-        Iterator<Number> it=collection.iterator();
-        while (it.hasNext()) {
+        Iterator<Double> iterator=collection.iterator();
+        while(iterator.hasNext()) {
+            Double d = iterator.next() + num;
             collection.add(d);
-            collection.remove(it.next());
         }
-
     }
 
     /**
