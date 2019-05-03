@@ -38,7 +38,7 @@ public class Main {
         MathBox mathBox3= new MathBox(numbers);
 
         //В карту добавляем 3 объекта. Так как 2 одинаковых - сохраняются 2
-        Map<Integer,MathBox> map = new HashMap<Integer,MathBox>();
+        Map<Integer,MathBox> map = new HashMap<>();
         map.put(mathBox.hashCode(),mathBox);
         map.put(mathBox2.hashCode(),mathBox2);
         map.put(mathBox2.hashCode(),mathBox3);
