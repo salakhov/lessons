@@ -39,6 +39,7 @@ public class MathBox<T extends Number> extends ObjectBox {
     public void splitter(T num){
        //TODO Спросить и ментора в чем разница двух записей Set collectionCopy = new HashSet<T>(); - работает
         //TODO Set <T> collectionCopy = new HashSet<>(); - НЕ работает
+        //Set <T> collectionCopy = new HashSet<>(); должно работать. надо разбираться
         Set collectionCopy = new HashSet<T>();
         Iterator<T> iterator=collection.iterator();
         while(iterator.hasNext()) {
