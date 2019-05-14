@@ -14,7 +14,6 @@ public class Text implements Serializable {
 
     public void genText(String [] wordsArray, Double probability){
         int currentTextSize = 0;
-        //TODO ???? i=20
         while(currentTextSize<=this.textsize){
             Abstract abstr = new Abstract(wordsArray,probability);
             abstr.genAbstract();
