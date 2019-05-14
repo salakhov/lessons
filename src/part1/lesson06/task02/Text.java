@@ -4,6 +4,10 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Класс текст, состоит из абзацев. Текст в свойствах имеет размер, равный размеру файлов
+ */
+
 public class Text implements Serializable {
     private List<Abstract> text = new LinkedList<>();
     private int textsize;
@@ -12,12 +16,21 @@ public class Text implements Serializable {
         this.textsize = textsize;
     }
 
+    /**
+     * Функция генерирования текста.
+     * @param wordsArray - массив слов, которые помешиваются в предложения
+     * @param probability - вероятность нахождения слова
+     */
     public void genText(String [] wordsArray, Double probability){
         int currentTextSize = 0;
         while(currentTextSize<=this.textsize){
             Abstract abstr = new Abstract(wordsArray,probability);
             abstr.genAbstract();
             int abstractSize = abstr.getSize();
+            int perspectiveTextSize = currentTextSize+abstractSize;
+            if (perspectiveTextSize>textsize){
+                abstr.cutAbstractSize(textsize-currentTextSize);
+            }
             currentTextSize+=abstractSize;
             text.add(abstr);
         }

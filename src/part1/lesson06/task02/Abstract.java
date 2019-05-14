@@ -5,37 +5,28 @@ import java.io.Serializable;
 import java.util.*;
 
 /**
- * Задание 2. Создать генератор текстовых файлов, работающий по следующим правилам:
- *
- * DONE Предложение состоит из 1<=n1<=15 слов. В предложении после произвольных слов могут находиться запятые.
- * DONE Слово состоит из 1<=n2<=15 латинских букв
- * DONE Слова разделены одним пробелом
- * DONE Предложение начинается с заглавной буквы
- * DONE Предложение заканчивается (.|!|?)+" "
- * DONE Текст состоит из абзацев. в одном абзаце 1<=n3<=20 предложений. В конце абзаца стоит разрыв строки и перенос каретки.
- * Есть массив слов 1<=n4<=1000. Есть вероятность probability вхождения одного из слов этого массива в
- * следующее предложение (1/probability).
- * Необходимо написать метод getFiles(String path, int n, int size, String[] words, int probability),
- * который создаст n файлов размером size в каталоге path. words - массив слов, probability - вероятность.
+ * Класс абзац, сериализуемый
+ * abstr - Текст абзаца
+ * wordsArray - масси строк для подмешивания в предложение
+ * probability - вероятность нахождения слова в тексте
+ * size - размер
  */
 public class Abstract implements Serializable {
-    private List<String> abstr;
+    private String abstr;
     private String[] wordsArray;
     private Double probability;
     private int size;
 
     public Abstract(String[] wordsArray,Double probability) {
-        this.abstr = new LinkedList<>();
         this.wordsArray = wordsArray;
         this.probability = probability;
     }
 
-//    public Abstract(String[] wordsArray,Double probability,int size) {
-//        this.abstr = new LinkedList<>();
-//        this.wordsArray = wordsArray;
-//        this.probability = probability;
-//        this.size = size;
-//    }
+    /**
+     * Функция генерирует слово с заданными параметрами
+     * Слово состоит из 1<=n2<=15 латинских букв
+     * @return - слово маленькими буквами
+     */
 
     public String genWord(){
         Random rnd=new Random();
@@ -43,6 +34,10 @@ public class Abstract implements Serializable {
         return org.apache.commons.lang3.RandomStringUtils.randomAlphabetic(count).toLowerCase();
    }
 
+    /**
+     * Генерирует слово для начала предложения в котором первое слово начинается с заглавной буквы
+     * @return - слово с зглавной буквы
+     */
    public String genFirstWord(){
 
         String str=genWord();
@@ -50,15 +45,20 @@ public class Abstract implements Serializable {
         return str;
    }
 
-    public int getSize(){
+    /**
+     * Функция возвращает размер абзаца
+     * @return
+     */
+   public int getSize(){
         return this.toString().length();
     }
 
-    public void setSize(int size){
-        this.size = size;
-    }
-
-
+    /**
+     * Функция генерирует предложение и подмешивает туда слово из массива слов
+     * @param word слово для подмешивания
+     * @return - предложение с заглавной буквы с запятыми, слова разделены одним пробелом*
+     *          Предложение заканчивается (.|!|?)+" "
+     */
     public String genSentance(String word){
         char [] punktuation = {'.','!','?'};
         Random rnd = new Random();
@@ -70,13 +70,12 @@ public class Abstract implements Serializable {
         int wordPosition = 2+ rnd.nextInt(wordsInSentence);  //позиция слова для вставки не первое и не последнее
         for (int i=1;i<=wordsInSentence;i++){
             if(i==wordPosition){
-                list.add(word);
+                list.add(word); // вставляем произвольно сгенерированное слово
             }
             else {
                 list.add(genWord());
             }
         }
-
         //Определяем позиции запятых в предложении
         int comaPosition;
         //если предложение короткое, запятых обычно нет
@@ -84,8 +83,6 @@ public class Abstract implements Serializable {
             comaPosition=-1;
         else
             comaPosition=1+rnd.nextInt(list.size()-1);
-
-
         //составляем слова в предложение и учитываем запятые
         String sentence=list.get(0);
         for(int i=1;i<list.size();i++){
@@ -94,46 +91,50 @@ public class Abstract implements Serializable {
                 sentence= sentence+", ";
             }
         }
-
         //Расставляем знаки препинания
         int finalComa=rnd.nextInt(3);
         sentence=sentence+punktuation[finalComa] + " ";
 
         return sentence;
-       //System.out.println(sentence);
     }
+
     public String genSentance(){
         return genSentance(null);
     }
 
+    /**
+     * Функция генерирования абзаца с учетом вероятности нахождения слова измассива слов
+     */
     public void genAbstract(){
         Random rnd = new Random();
         int sentenceNumber = 1+rnd.nextInt(19);
-        String str="";
+        this.abstr="";
 
         for(int i=1;i<sentenceNumber;i++){
             Double count=i%probability;
             if(count == 0.0){
                 int wordNumber = rnd.nextInt(wordsArray.length);
-                str = str+genSentance(wordsArray[wordNumber]);
+                this.abstr = this.abstr+genSentance(wordsArray[wordNumber]);
             }
             else {
-                str = str + genSentance();
+                this.abstr = this.abstr + genSentance();
             }
         }
-        abstr.add(str);
     }
-
-//    public void printAbstract(){
-//        abstr.forEach(System.out::println);
- //   }
 
     @Override
     public String toString() {
-        String returnStr="";
-        for(String str:abstr)
-            returnStr=returnStr+str.toString();
-        return returnStr;
+        return this.abstr;
+    }
+
+    /**
+     * Функция обрезки абзаца до необходимого значения
+     * @param size - размер абзаца
+     */
+    public void cutAbstractSize(int size) {
+         String str = this.abstr.substring(0,size-1);
+         str+=".";
+         this.abstr = str;
     }
 }
 
