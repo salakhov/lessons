@@ -18,35 +18,36 @@ public class Text implements Serializable {
 
     /**
      * Функция генерирования текста.
-     * @param wordsArray - массив слов, которые помешиваются в предложения
+     *
+     * @param wordsArray  - массив слов, которые помешиваются в предложения
      * @param probability - вероятность нахождения слова
      */
-    public void genText(String [] wordsArray, Double probability){
+    public void genText(String[] wordsArray, Double probability) {
         int currentTextSize = 0;
-        while(currentTextSize<=this.textsize){
-            Abstract abstr = new Abstract(wordsArray,probability);
+        while (currentTextSize <= this.textsize) {
+            Abstract abstr = new Abstract(wordsArray, probability);
             abstr.genAbstract();
             int abstractSize = abstr.getSize();
-            int perspectiveTextSize = currentTextSize+abstractSize;
-            if (perspectiveTextSize>textsize){
-                abstr.cutAbstractSize(textsize-currentTextSize);
+            int perspectiveTextSize = currentTextSize + abstractSize;
+            if (perspectiveTextSize > textsize) {
+                abstr.cutAbstractSize(textsize - currentTextSize);
             }
-            currentTextSize+=abstractSize;
+            currentTextSize += abstractSize;
             text.add(abstr);
         }
     }
 
-    public void printText(){
-        for(Abstract str:text)
+    public void printText() {
+        for (Abstract str : text)
             System.out.println(str.toString());
 
     }
 
     @Override
     public String toString() {
-        String returnStr="";
-        for(Abstract abstr:text)
-            returnStr=returnStr+abstr.toString()+"\n\r";
+        String returnStr = "";
+        for (Abstract abstr : text)
+            returnStr = returnStr + abstr.toString() + "\n\r";
         return returnStr;
     }
 }
