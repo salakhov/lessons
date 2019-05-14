@@ -1,5 +1,6 @@
 package part1.lesson06.task02;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
@@ -13,20 +14,19 @@ import java.io.PrintStream;
 public class FileGenerator {
 
     void getFiles(String path, int n, int size, String[] words, Double probability) {
-
         for(Integer i = 0; i<n;i++){
-            String filename = path+i.toString()+".txt";
-            try(PrintStream dos = new PrintStream(new FileOutputStream(filename))){
-                Text text = new Text(size);
-                text.genText(words,probability);
-                dos.println(text.toString());
-                text.printText();
-            }
-            catch (Exception ex){
-                ex.printStackTrace();
-            }
-
-
+                String filename = path+i.toString()+".txt";
+                try(FileOutputStream out=new FileOutputStream(filename);
+                    BufferedOutputStream bos = new BufferedOutputStream(out)){
+                    Text text = new Text(size);
+                    text.genText(words,probability);
+                    byte[] buff = text.toString().getBytes();
+                    bos.write(buff,0,size);
+                    text.printText();
+                }
+                catch (Exception ex){
+                    ex.printStackTrace();
+                }
         }
     }
 }
