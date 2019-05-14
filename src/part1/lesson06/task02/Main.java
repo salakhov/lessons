@@ -21,8 +21,8 @@ public class Main {
 
     public static void main(String[] args) {
         String FILE_NAME = "path/text";
-        String [] words = {"aaaa","bbbb","cccc","dddd","eeee","gggg"};
+        String[] words = {"aaaa", "bbbb", "cccc", "dddd", "eeee", "gggg"};
         FileGenerator fgen = new FileGenerator();
-        fgen.getFiles(FILE_NAME,10,10000,words,1.0);
+        fgen.getFiles(FILE_NAME, 10, 10000, words, 1.0);
     }
 }
