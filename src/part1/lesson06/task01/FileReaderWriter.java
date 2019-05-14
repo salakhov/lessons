@@ -21,43 +21,44 @@ public class FileReaderWriter {
     /**
      * Чтение файла по строкам. Каждую сроку проверяется на наличие нескольких слов. Разделитель " "
      * Кадое слово добавляется в Set
+     *
      * @param filename
      */
     public void ReadFile(String filename) {
-        try{
+        try {
             stringList = Files.readAllLines(Paths.get(filename));
             //Цикл по строкам в файле
-            for(String strLine:stringList){
+            for (String strLine : stringList) {
 
-                if(strLine.contains(" ")) {
+                if (strLine.contains(" ")) {
                     String[] str;
                     str = strLine.split(" ");
                     for (String word : str) {
                         wordsSet.add(word);
                     }
-                }
-                else {
-                   wordsSet.add(strLine);
+                } else {
+                    wordsSet.add(strLine);
                 }
             }
             stringList.forEach(System.out::println);
             System.out.println("---");
             wordsSet.forEach(System.out::println);
-        }catch(IOException err){
+        } catch (IOException err) {
             err.printStackTrace();
         }
     }
 
     /**
      * Записываем Set в файл
+     *
      * @param filename
      */
 
-    public void WriteFile(String filename){
+    public void WriteFile(String filename) {
 
-        try{
-            Files.write(Paths.get(filename),wordsSet);
-        }catch(IOException err){
+        try {
+            Files.write(Paths.get(filename), wordsSet);
+        } catch (IOException err) {
             err.printStackTrace();
         }
 
