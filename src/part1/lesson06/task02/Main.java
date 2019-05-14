@@ -23,7 +23,7 @@ public class Main {
         String FILE_NAME = "path/text";
         String [] words = {"aaaa","bbbb","cccc"};
         FileGenerator fgen = new FileGenerator();
-        fgen.getFiles(FILE_NAME,10,2,words,1);
+        fgen.getFiles(FILE_NAME,10,100,words,1.0);
 
     }
 }

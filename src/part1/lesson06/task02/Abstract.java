@@ -22,14 +22,20 @@ public class Abstract implements Serializable {
     private List<String> abstr;
     private String[] wordsArray;
     private Double probability;
-
+    private int size;
 
     public Abstract(String[] wordsArray,Double probability) {
         this.abstr = new LinkedList<>();
         this.wordsArray = wordsArray;
         this.probability = probability;
-
     }
+
+//    public Abstract(String[] wordsArray,Double probability,int size) {
+//        this.abstr = new LinkedList<>();
+//        this.wordsArray = wordsArray;
+//        this.probability = probability;
+//        this.size = size;
+//    }
 
     public String genWord(){
         Random rnd=new Random();
@@ -44,7 +50,16 @@ public class Abstract implements Serializable {
         return str;
    }
 
-   public String genSentance(String word){
+    public int getSize(){
+        return this.toString().length();
+    }
+
+    public void setSize(int size){
+        this.size = size;
+    }
+
+
+    public String genSentance(String word){
         char [] punktuation = {'.','!','?'};
         Random rnd = new Random();
         List <String>list = new ArrayList<>();
@@ -62,8 +77,7 @@ public class Abstract implements Serializable {
             }
         }
 
-        //составляем слова в предложение + запятые
-        String sentence=list.get(0);
+        //Определяем позиции запятых в предложении
         int comaPosition;
         //если предложение короткое, запятых обычно нет
         if (list.size()<3)
@@ -71,8 +85,11 @@ public class Abstract implements Serializable {
         else
             comaPosition=1+rnd.nextInt(list.size()-1);
 
+
+        //составляем слова в предложение и учитываем запятые
+        String sentence=list.get(0);
         for(int i=1;i<list.size();i++){
-            sentence= sentence+" "+ list.get(i);
+            sentence=sentence+" "+ list.get(i);
             if(i==comaPosition){
                 sentence= sentence+", ";
             }
@@ -86,7 +103,6 @@ public class Abstract implements Serializable {
        //System.out.println(sentence);
     }
     public String genSentance(){
-
         return genSentance(null);
     }
 
@@ -108,9 +124,9 @@ public class Abstract implements Serializable {
         abstr.add(str);
     }
 
-    public void printAbstract(){
-        abstr.forEach(System.out::println);
-    }
+//    public void printAbstract(){
+//        abstr.forEach(System.out::println);
+ //   }
 
     @Override
     public String toString() {

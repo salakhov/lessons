@@ -26,7 +26,7 @@ public class FileGenerator {
         for(Integer i = 0; i<n;i++){
             String filename = path+i.toString()+".txt";
             try(PrintStream dos = new PrintStream(new FileOutputStream(filename))){
-                Text text = new Text();
+                Text text = new Text(size);
                 text.genText(words,probability);
                 dos.println(text.toString());
                 text.printText();
