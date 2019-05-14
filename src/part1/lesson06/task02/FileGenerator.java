@@ -1,9 +1,7 @@
 package part1.lesson06.task02;
 
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
-import java.io.PrintStream;
 
 /**
  * Класс генератор файлов.
