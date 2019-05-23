@@ -2,6 +2,9 @@ package part1.lesson07.taks01;
 
 import part1.lesson06.task01.FileReaderWriter;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 /**
  * Дан массив случайных чисел. Написать программу для вычисления факториалов всех элементов массива. Использовать пул потоков для решения задачи.
  * Особенности выполнения:
@@ -16,6 +19,20 @@ import part1.lesson06.task01.FileReaderWriter;
 
 public class Main {
     public static void main(String[] args) {
+        Random rnd = new Random();
+        ArrayList <Integer>array = new ArrayList<>();
+        for (int i=0;i<100;i++) {
+            int num = rnd.nextInt(20);
+            array.add(num);
+           // System.out.println(num);
+        }
+        array.forEach(System.out::println);
+
+        Thread thread = new Thread(new Factorial(array));
+        thread.start();
+
+        //Factorial fact = new Factorial(array);
+        //fact.run();
 
     }
 
