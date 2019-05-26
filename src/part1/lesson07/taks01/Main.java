@@ -1,7 +1,5 @@
 package part1.lesson07.taks01;
 
-import part1.lesson06.task01.FileReaderWriter;
-
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,16 +18,22 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         Random rnd = new Random();
-        ArrayList <Integer>array = new ArrayList<>();
-        for (int i=0;i<100;i++) {
+        ArrayList<Integer> array = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
             int num = rnd.nextInt(20);
             array.add(num);
-           // System.out.println(num);
+            // System.out.println(num);
         }
-        array.forEach(System.out::println);
 
-        Thread thread = new Thread(new Factorial(array));
-        thread.start();
+
+        ParallelCalc parallelCalc = new ParallelCalc(array);
+        parallelCalc.CalcClassicMethod();
+
+        array.forEach(System.out::println);
+        //Thread thread = new Thread(new ParallelCalc(array));
+        //Thread thread2 = new Thread(new ParallelCalc(array));
+        //thread.start();
+        //thread2.start();
 
         //Factorial fact = new Factorial(array);
         //fact.run();
