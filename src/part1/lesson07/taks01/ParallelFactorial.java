@@ -14,7 +14,7 @@ public class ParallelFactorial implements Callable<BigInteger> {
 
     private BigInteger CalcMultiplication() {
         BigInteger result = BigInteger.valueOf(this.number1);
-        for (int i = this.number1+1; i <= this.number2; i++) {
+        for (int i = this.number1 + 1; i <= this.number2; i++) {
             result = result.multiply(BigInteger.valueOf(i));
         }
         return result;

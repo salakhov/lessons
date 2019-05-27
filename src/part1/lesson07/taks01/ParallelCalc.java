@@ -55,13 +55,13 @@ public class ParallelCalc {
         //Iterator <Integer> it = array.iterator();
 
         //while (it.hasNext()) {
-        for(Integer i:array){
+        for (Integer i : array) {
             //Integer value = it.next();
             Integer value = i;
-            Integer middleValue = value %= 2;
+            Integer middleValue = Math.abs(value / 2);
 
-            ParallelFactorial calc1 = new ParallelFactorial(0, middleValue);
-            ParallelFactorial calc2 = new ParallelFactorial(middleValue, value);
+            ParallelFactorial calc1 = new ParallelFactorial(1, middleValue);
+            ParallelFactorial calc2 = new ParallelFactorial(middleValue+1, value);
             try {
                 ExecutorService execute1 = Executors.newFixedThreadPool(2);
                 Future future1;
