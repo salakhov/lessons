@@ -1,6 +1,8 @@
 package part1.lesson07.taks01;
 
 import java.math.BigInteger;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -18,18 +20,17 @@ public class Factorial implements Runnable {
     }
 
     public BigInteger CalcFactorial() {
-        BigInteger result = BigInteger.ONE;
-        BigInteger casheRet = cashe.get(this.number);
-        //проверяем если число есть в кеше возвращаем из кеша.
-        if (casheRet != null) {
-            //System.out.println("exec from cashe");
-            return casheRet;
-        }
-        //TODO проверяем есть ли в кеше число меньшее
+        BigInteger result=null;
+        //Пытаемся взять из кеша
+        if(!cashe.isEmpty())
+            result = getResultFromCashe();
 
         //вычисляем факториал по честному
-        for (int i = 1; i <= this.number; i++) {
-            result = result.multiply(BigInteger.valueOf(i));
+        if(result==null) {
+            result = BigInteger.ONE;
+            for (int i = 1; i <= this.number; i++) {
+                result = result.multiply(BigInteger.valueOf(i));
+            }
         }
         cashe.put(this.number, result);
         return result;
@@ -46,6 +47,37 @@ public class Factorial implements Runnable {
 //        for(int i=0;i<delimeter;i++){
 //            number [i] = this.number %=delimeter;
 //        }
+        return result;
+    }
+
+    private Integer getNearestValue() {
+        Set<Integer> keys = cashe.keySet();
+        Iterator <Integer> it = keys.iterator();
+        while (it.hasNext()) {
+            Integer value = it.next();
+            Integer nextValue = it.next();
+            if (nextValue > number) {
+                return value;
+            }
+        }
+        return null;
+    }
+
+    private BigInteger getResultFromCashe() {
+        BigInteger result = cashe.get(this.number);
+//        if(result==null) {
+//            System.out.println("Found in cashe");
+//            Integer nerestValue = getNearestValue();
+//            if (nerestValue != null) {
+//                BigInteger nerestValueFactor = cashe.get(nerestValue);
+//                for (int i = nerestValue; i < this.number; i++) {
+//                    result = result.multiply(BigInteger.valueOf(i));
+//                }
+//            }
+//        }
+        if(result!=null){
+            System.out.println("Took from cashe");
+        }
         return result;
     }
 
