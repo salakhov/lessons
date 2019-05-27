@@ -19,25 +19,15 @@ public class Main {
     public static void main(String[] args) {
         Random rnd = new Random();
         ArrayList<Integer> array = new ArrayList<>();
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             int num = rnd.nextInt(20);
             array.add(num);
-            // System.out.println(num);
         }
-
 
         ParallelCalc parallelCalc = new ParallelCalc(array);
         parallelCalc.CalcClassicMethod();
 
         array.forEach(System.out::println);
-        //Thread thread = new Thread(new ParallelCalc(array));
-        //Thread thread2 = new Thread(new ParallelCalc(array));
-        //thread.start();
-        //thread2.start();
-
-        //Factorial fact = new Factorial(array);
-        //fact.run();
-
     }
 
 
