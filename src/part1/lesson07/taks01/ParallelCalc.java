@@ -1,8 +1,12 @@
 package part1.lesson07.taks01;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Future;
 
 
 /**
@@ -45,5 +49,36 @@ public class ParallelCalc {
                 }
             }
         }
+    }
+
+    public void CalcParallelMethod() {
+        //Iterator <Integer> it = array.iterator();
+
+        //while (it.hasNext()) {
+        for(Integer i:array){
+            //Integer value = it.next();
+            Integer value = i;
+            Integer middleValue = value %= 2;
+
+            ParallelFactorial calc1 = new ParallelFactorial(0, middleValue);
+            ParallelFactorial calc2 = new ParallelFactorial(middleValue, value);
+            try {
+                ExecutorService execute1 = Executors.newFixedThreadPool(2);
+                Future future1;
+                future1 = execute1.submit(calc1);
+                Future future2;
+                future2 = execute1.submit(calc2);
+
+                BigInteger result1 = (BigInteger) future1.get();
+                BigInteger result2 = (BigInteger) future2.get();
+
+                System.out.println(result1 + " " + result2);
+
+            } catch (Exception err) {
+                err.printStackTrace();
+            }
+        }
+
+
     }
 }
