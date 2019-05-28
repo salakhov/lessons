@@ -25,8 +25,8 @@ public class Main {
         }
 
         ParallelCalc parallelCalc = new ParallelCalc(array);
-        //parallelCalc.CalcClassicMethod();
-        parallelCalc.CalcParallelMethod();
+        parallelCalc.CalcClassicMethod();
+        //parallelCalc.CalcParallelMethod();
 
         array.forEach(System.out::println);
     }

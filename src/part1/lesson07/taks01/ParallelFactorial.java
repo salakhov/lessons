@@ -21,7 +21,7 @@ public class ParallelFactorial implements Callable<BigInteger> {
     }
 
     @Override
-    public BigInteger call() throws Exception {
+    synchronized public BigInteger call() throws Exception {
         return CalcMultiplication();
     }
 }

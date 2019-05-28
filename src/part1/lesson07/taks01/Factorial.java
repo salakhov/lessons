@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 public class Factorial implements Runnable {
-    private static ConcurrentHashMap<Integer, BigInteger> cashe = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<Integer, BigInteger> cache = new ConcurrentHashMap<>();
     private Integer number;
 
     public Factorial(Integer number) {
@@ -30,7 +30,7 @@ public class Factorial implements Runnable {
     public BigInteger CalcFactorial() {
         BigInteger result = null;
         //Пытаемся взять из кеша
-        if (!cashe.isEmpty())
+        if (!cache.isEmpty())
             result = getResultFromCashe();
         //вычисляем факториал по честному
         if (result == null) {
@@ -40,12 +40,12 @@ public class Factorial implements Runnable {
             }
         }
         //кладем в кеш
-        cashe.put(this.number, result);
+        cache.put(this.number, result);
         return result;
     }
 
     private BigInteger getResultFromCashe() {
-        return cashe.get(this.number);
+        return cache.get(this.number);
     }
 
     @Override

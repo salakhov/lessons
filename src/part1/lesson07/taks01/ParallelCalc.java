@@ -42,7 +42,7 @@ public class ParallelCalc {
                     Integer value = (Integer) it.next();
                     fact[calc] = new Factorial(value);
                     thread[calc] = new Thread(fact[calc]);
-                    thread[calc].run();
+                    thread[calc].start();
                 } catch (NoSuchElementException err) {
                     //Если кончились элементы и на все потоки не хватило
                     break;
@@ -77,7 +77,7 @@ public class ParallelCalc {
                 BigInteger result1 = (BigInteger) future1.get();
                 BigInteger result2 = (BigInteger) future2.get();
 
-                System.out.println(result1 + " " + result2);
+                System.out.println(result1 + " +++ " + result2);
 
             } catch (Exception err) {
                 err.printStackTrace();
