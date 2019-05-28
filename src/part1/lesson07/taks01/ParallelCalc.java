@@ -51,6 +51,11 @@ public class ParallelCalc {
         }
     }
 
+    /**
+     * Вычисление распаралеливанием одного числа
+     *
+     */
+
     public void CalcParallelMethod() {
         //Iterator <Integer> it = array.iterator();
 
