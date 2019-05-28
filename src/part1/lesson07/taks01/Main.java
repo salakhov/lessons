@@ -16,6 +16,8 @@ import java.util.Random;
  * При чем вычислив факториал для одного числа, можно запомнить эти данные и использовать их для вычисления другого, что будет гораздо быстрее
  */
 
+//TODO  1. Thread Pool Executor а не запускать все потоки одновременно
+//TODO  2. Разобраться с callable
 public class Main {
     public static void main(String[] args) {
         Random rnd = new Random();
