@@ -1,6 +1,7 @@
 package part1.lesson07.taks01;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -18,7 +19,7 @@ import java.util.Random;
 public class Main {
     public static void main(String[] args) {
         Random rnd = new Random();
-        ArrayList<Integer> array = new ArrayList<>();
+        List<Integer> array = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
             int num = rnd.nextInt(20);
             array.add(num);

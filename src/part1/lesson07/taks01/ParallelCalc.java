@@ -3,6 +3,7 @@ package part1.lesson07.taks01;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ExecutorService;
@@ -16,10 +17,10 @@ import java.util.concurrent.Future;
  */
 
 public class ParallelCalc {
-    private ArrayList<Integer> array;
+    private List<Integer> array;
     private int parralelism;
 
-    public ParallelCalc(ArrayList<Integer> array) {
+    public ParallelCalc(List<Integer> array) {
         this.array = array;
         this.parralelism = 3;
     }

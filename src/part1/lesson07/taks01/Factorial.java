@@ -1,6 +1,7 @@
 package part1.lesson07.taks01;
 
 import java.math.BigInteger;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -15,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 
 public class Factorial implements Runnable {
-    private static ConcurrentHashMap<Integer, BigInteger> cache = new ConcurrentHashMap<>();
+    private static Map<Integer, BigInteger> cache = new ConcurrentHashMap<>();
     private Integer number;
 
     public Factorial(Integer number) {
