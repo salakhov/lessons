@@ -43,9 +43,12 @@ public class ParallelCalc {
                     Integer value = (Integer) it.next();
                     fact[calc] = new Factorial(value);
                     thread[calc] = new Thread(fact[calc]);
-                    thread[calc].start();
+                    ExecutorService service = Executors.newFixedThreadPool(parralelism);
+                    service.execute(fact[calc]);
+                    //thread[calc].start();
                 } catch (NoSuchElementException err) {
                     //Если кончились элементы и на все потоки не хватило
+
                     break;
                 }
             }

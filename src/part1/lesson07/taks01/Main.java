@@ -23,7 +23,8 @@ public class Main {
         Random rnd = new Random();
         List<Integer> array = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            int num = rnd.nextInt(20);
+            //int num = rnd.nextInt(20);
+            int num = i;
             array.add(num);
         }
 
