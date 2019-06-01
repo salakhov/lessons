@@ -1,6 +1,7 @@
 package part1.lesson07.taks01;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -15,17 +16,21 @@ import java.util.Random;
  * При чем вычислив факториал для одного числа, можно запомнить эти данные и использовать их для вычисления другого, что будет гораздо быстрее
  */
 
+//DONE TODO  1. Thread Pool Executor а не запускать все потоки одновременно
+//DONE TODO  2. Разобраться с callable
 public class Main {
     public static void main(String[] args) {
         Random rnd = new Random();
-        ArrayList<Integer> array = new ArrayList<>();
+        List<Integer> array = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            int num = rnd.nextInt(20);
+            //int num = rnd.nextInt(20);
+            int num = i;
             array.add(num);
         }
 
         ParallelCalc parallelCalc = new ParallelCalc(array);
         parallelCalc.CalcClassicMethod();
+        //parallelCalc.CalcParallelMethod();
 
         array.forEach(System.out::println);
     }
