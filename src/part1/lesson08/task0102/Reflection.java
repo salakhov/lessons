@@ -1,8 +1,7 @@
-package part1.lesson08.task01;
+package part1.lesson08.task0102;
 
 import java.io.*;
 import java.lang.reflect.Field;
-import java.util.Scanner;
 
 /**
  * Класс для выполеня функции рефлексии

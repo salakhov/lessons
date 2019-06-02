@@ -1,4 +1,4 @@
-package part1.lesson08.task01;
+package part1.lesson08.task0102;
 
 /**
  * Тестовый класс для хранения параметров объекта
