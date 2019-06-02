@@ -17,8 +17,8 @@ public class Main {
         Reflection refl = new Reflection();
         Test test = new Test("typeValue",5,300);
 
-        refl.serialize(test,"111.txt");
-        testClass = (Test)refl.deSerialize("111.txt");
+        refl.serialize(test,"lesson08task01.txt");
+        testClass = (Test)refl.deSerialize("lesson08task01.txt");
         testClass.printClass();
 
     }
