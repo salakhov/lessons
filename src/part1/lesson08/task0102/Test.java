@@ -10,6 +10,7 @@ public class Test {
     private int mark;
     private Integer count;
     private ObjectToSerialize objectToSerialize;
+    private ObjectSimple objectSiple;
 
 
 

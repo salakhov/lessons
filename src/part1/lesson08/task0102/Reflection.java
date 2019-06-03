@@ -22,7 +22,45 @@ public class Reflection {
      * @param filename - имя файла для сохранения
      */
 
-    void serialize(Object object, String filename) {
+    public void serialize(Object object, String filename) {
+        serializeSimpleFields(object, filename);
+        serializeSerializableObject(object, "serializable.ser");
+    }
+
+    private void serializeSerializableObject(Object object, String filename) {
+        Class cl = object.getClass();
+        Field [] fields = cl.getDeclaredFields();
+
+        //TODO спросить как проверить что экземпляр унаследован от serializable
+        for(Field field:fields) {
+            String fieldTypeStr = field.getType().toString();
+            String objectTypeStr = ObjectToSerialize.class.toString();
+            if (fieldTypeStr.equals(objectTypeStr)){
+                //Сохраняем сериализованный объект
+                try (FileOutputStream fos = new FileOutputStream(filename);
+                    ObjectOutputStream os = new ObjectOutputStream(fos)){
+                    field.setAccessible(true);
+                    ObjectToSerialize objectToSerialize = (ObjectToSerialize) field.get(object);
+                    os.writeObject(objectToSerialize);
+                }
+                catch (IOException ex){
+                    ex.printStackTrace();
+                }
+                catch (IllegalAccessException ex){
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+
+    /**
+     * Функция сохранения содержимого примитивных типов с помощью рефлексии
+     * @param object
+     * @param filename
+     */
+
+    private void serializeSimpleFields(Object object, String filename){
+
         Class cl = object.getClass();
 
         try (FileOutputStream out = new FileOutputStream(filename);
@@ -46,6 +84,7 @@ public class Reflection {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+
     }
 
     /**
@@ -54,7 +93,19 @@ public class Reflection {
      * @return - объект
      */
 
-    Object deSerialize(String file) {
+    public Object deSerialize(String file) {
+        Test testClass = null;
+        testClass = (Test) deserializeSimpleFields(file);
+        //testClass = (Test) deserializeSerializableFields(f);
+        return testClass;
+    }
+
+    /**
+     * Функция загрузки примитивных типов
+     * @param file
+     * @return
+     */
+    private Object deserializeSimpleFields(String file){
         int mark=0;
         String type = null;
         Integer count=null;
@@ -64,7 +115,7 @@ public class Reflection {
             type = br.readLine();
             count = Integer.parseInt(br.readLine());
             System.out.println(mark + type + count);
-         }
+        }
         catch (Exception ex){
             ex.printStackTrace();
         }
@@ -90,4 +141,6 @@ public class Reflection {
         }
         return testClass;
     }
+
+
 }

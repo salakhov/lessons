@@ -3,7 +3,7 @@ package part1.lesson08.task0102;
 import java.io.Serializable;
 
 /**
- * Ссылочный объект для загрузки через рефлексию
+ * Ссылочный объект для загрузки через рефлексию с использованием интерфейса serializable
  */
 
 public class ObjectToSerialize implements Serializable {
