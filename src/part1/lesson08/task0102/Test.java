@@ -9,6 +9,9 @@ public class Test {
     private String type;
     private int mark;
     private Integer count;
+    private ObjectToSerialize objectToSerialize;
+
+
 
     public Test(String type, int mark, Integer count) {
         this.type = type;

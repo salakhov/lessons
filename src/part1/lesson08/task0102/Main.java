@@ -1,5 +1,7 @@
 package part1.lesson08.task0102;
 
+import java.io.*;
+
 /**
 Задание 1. Необходимо разработать класс, реализующий следующие методы:
         void serialize (Object object, String file);
@@ -23,6 +25,29 @@ public class Main {
         refl.serialize(test,"lesson08task01.txt");
         testClass = (Test)refl.deSerialize("lesson08task01.txt");
         testClass.printClass();
+
+        try (FileOutputStream fos = new FileOutputStream("Object.ser");
+             ObjectOutputStream os = new ObjectOutputStream(fos)){
+            ObjectToSerialize objectToSerialize;
+            objectToSerialize = new ObjectToSerialize("Moskva",1);
+            os.writeObject(objectToSerialize);
+            System.out.println(objectToSerialize.toString());
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+
+        try(FileInputStream fis = new FileInputStream("Object.ser");
+            ObjectInputStream is = new ObjectInputStream(fis)){
+            ObjectToSerialize obj = (ObjectToSerialize)is.readObject();
+            System.out.println(obj.toString());
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+        catch (ClassNotFoundException ex){
+            ex.printStackTrace();
+        }
 
     }
 
