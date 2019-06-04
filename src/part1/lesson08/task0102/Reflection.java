@@ -33,6 +33,7 @@ public class Reflection {
 
         //TODO спросить как проверить что экземпляр унаследован от serializable
         for(Field field:fields) {
+            //Определяем является ли объект классом который можно сериализовать
             String fieldTypeStr = field.getType().toString();
             String objectTypeStr = ObjectToSerialize.class.toString();
             if (fieldTypeStr.equals(objectTypeStr)){
@@ -41,6 +42,7 @@ public class Reflection {
                     ObjectOutputStream os = new ObjectOutputStream(fos)){
                     field.setAccessible(true);
                     ObjectToSerialize objectToSerialize = (ObjectToSerialize) field.get(object);
+                    //Class<?> c = object.getClass();
                     os.writeObject(objectToSerialize);
                 }
                 catch (IOException ex){
@@ -96,7 +98,18 @@ public class Reflection {
     public Object deSerialize(String file) {
         Test testClass = null;
         testClass = (Test) deserializeSimpleFields(file);
-        //testClass = (Test) deserializeSerializableFields(f);
+        ObjectToSerialize obj = (ObjectToSerialize) deserializeSerializableFields("serializable.ser");
+
+        try{
+            Field objField = testClass.getClass().getDeclaredField("objectToSerialize");
+            objField.setAccessible(true);
+            objField.set(testClass,obj);
+        }catch (IllegalAccessException ex){
+            ex.printStackTrace();
+        }
+        catch (NoSuchFieldException ex){
+            ex.printStackTrace();
+        }
         return testClass;
     }
 
@@ -142,5 +155,25 @@ public class Reflection {
         return testClass;
     }
 
+    /**
+     * функция загрузки ссылочного объекта
+     * @param file
+     * @return
+     */
 
+    private Object deserializeSerializableFields(String file){
+        ObjectToSerialize objSerializable=null;
+
+        try(FileInputStream fis = new FileInputStream(file);
+            ObjectInputStream is = new ObjectInputStream(fis)){
+            objSerializable = (ObjectToSerialize)is.readObject();
+        }
+        catch (IOException ex){
+            ex.printStackTrace();
+        }
+        catch (ClassNotFoundException ex){
+            ex.printStackTrace();
+        }
+        return objSerializable;
+    }
 }

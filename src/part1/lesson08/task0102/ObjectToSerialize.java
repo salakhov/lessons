@@ -17,7 +17,7 @@ public class ObjectToSerialize implements Serializable {
 
     @Override
     public String toString() {
-        return "ObjectToSave{" +
+        return "ObjectToSerialize{" +
                 "objectName='" + objectName + '\'' +
                 ", objectCount=" + objectCount +
                 '}';

@@ -18,36 +18,26 @@ public class Main {
     public static void main(String[] args) {
 
         Test testClass = null;
-
+        //Создаем экземпляра, реализующего методы по заданию
         Reflection refl = new Reflection();
-        Test test = new Test("typeValue",5,300);
+        //Создаем экземпляр объекта ссылочного типа (задание 2). Сериализуемый
+        ObjectToSerialize objectToSerialize = new ObjectToSerialize("Moskva",10);
 
+        //экземпляр объекта для проверки рефлексии
+        Test test = new Test("typeValue",5,300,objectToSerialize);
+        //ИСходный объект на печать
+        System.out.println("Исходный объект");
+        test.printClass();
+
+        //Сериализуем объект с использованием рефлексии
         refl.serialize(test,"lesson08task01.txt");
+
+        //Десерелизуем объект при помощи рефлексии
         testClass = (Test)refl.deSerialize("lesson08task01.txt");
+
+        //Проверяем
+        System.out.println("Десериализованный объект");
         testClass.printClass();
-
-        try (FileOutputStream fos = new FileOutputStream("Object.ser");
-             ObjectOutputStream os = new ObjectOutputStream(fos)){
-            ObjectToSerialize objectToSerialize;
-            objectToSerialize = new ObjectToSerialize("Moskva",1);
-            os.writeObject(objectToSerialize);
-            System.out.println(objectToSerialize.toString());
-        }
-        catch (IOException ex){
-            ex.printStackTrace();
-        }
-
-        try(FileInputStream fis = new FileInputStream("Object.ser");
-            ObjectInputStream is = new ObjectInputStream(fis)){
-            ObjectToSerialize obj = (ObjectToSerialize)is.readObject();
-            System.out.println(obj.toString());
-        }
-        catch (IOException ex){
-            ex.printStackTrace();
-        }
-        catch (ClassNotFoundException ex){
-            ex.printStackTrace();
-        }
 
     }
 
