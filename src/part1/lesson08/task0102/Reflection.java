@@ -70,16 +70,13 @@ public class Reflection {
 
             Field fieldMark = cl.getDeclaredField("mark");
             fieldMark.setAccessible(true);
-            //ps.println(fieldMark);
             ps.println(fieldMark.get(object));
 
             Field fieldType = cl.getDeclaredField("type");
             fieldType.setAccessible(true);
-            //ps.println(fieldType);
             ps.println(fieldType.get(object));
 
             Field fieldCount = cl.getDeclaredField("count");
-            //ps.println(fieldCount);
             fieldCount.setAccessible(true);
             ps.println(fieldCount.get(object));
 
