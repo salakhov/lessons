@@ -8,8 +8,6 @@ import java.util.Random;
  * Задание11: Перевести одну из предыдущих работ на использование стримов и лямбда-выражений там, где это уместно (возможно, жертвуя производительностью)
  */
 
-//DONE TODO  1. Thread Pool Executor а не запускать все потоки одновременно
-//DONE TODO  2. Разобраться с callable
 public class Main {
     public static void main(String[] args) {
         Random rnd = new Random();
