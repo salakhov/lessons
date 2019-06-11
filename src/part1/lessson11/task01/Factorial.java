@@ -51,7 +51,6 @@ public class Factorial implements Runnable {
 
     @Override
     public void run() {
-        BigInteger temp = CalcFactorial();
-        System.out.println("Factorial " + number + "=" + temp);
+        System.out.println("Factorial " + number + "=" + CalcFactorial());
     }
 }

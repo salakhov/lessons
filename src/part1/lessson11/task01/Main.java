@@ -14,14 +14,11 @@ public class Main {
         List<Integer> array = new ArrayList<>();
 
         for (int i = 0; i < 10; i++) {
-            //int num = rnd.nextInt(20);
-            int num = i;
-            array.add(num);
+            array.add(rnd.nextInt(20));
         }
 
-        ParallelCalc parallelCalc = new ParallelCalc(array);
-        parallelCalc.CalcClassicMethod();
-        //parallelCalc.CalcParallelMethod();
+        ParallelCalc parallelCalc = new ParallelCalc();
+        parallelCalc.CalcClassicMethod(array,3);
 
         array.forEach(System.out::println);
     }
