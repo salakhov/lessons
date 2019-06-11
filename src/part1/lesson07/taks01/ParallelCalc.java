@@ -27,18 +27,13 @@ public class ParallelCalc {
      */
     public void CalcClassicMethod() {
         Iterator it = array.iterator();
-        ExecutorService service = null;
+        ExecutorService service = Executors.newFixedThreadPool(parralelism);
         //Цикл по коллекции пока есть элементы
         while (it.hasNext()){
-            try{
-                Integer value = (Integer) it.next();
-                service = Executors.newFixedThreadPool(parralelism);
-                service.submit(new Factorial(value));
-            }
-            finally {
-                service.shutdown();
-            }
+            Integer value = (Integer) it.next();
+            service.submit(new Factorial(value));
         }
+        service.shutdown();
     }
 
     /**
