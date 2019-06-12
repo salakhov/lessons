@@ -93,7 +93,8 @@ public class SqlOperations {
         Statement st = this.connection.createStatement();
         ResultSet rs = st.executeQuery(SQL_SELECT);
         while(rs.next()){
-            System.out.println(rs.getString(2)+" " +rs.getString(1));
+            System.out.println("login: "+rs.getString(2)+
+                    " ssername: " +rs.getString(1));
         }
     }
 
@@ -106,21 +107,50 @@ public class SqlOperations {
         String SQL_INSERT_SAVE1 =
                 "INSERT INTO users(id, name, birthday, loginId, city, email, description) " +
                         "VALUES (6, 'SavepointA Savepointovicha Savepointov', '2014-04-04', 'savepointA', 'Tver', 'savepointA@mail.ru','Человек');";
+        String SQL_INSERT_SAVE1_ROLES =
+                "INSERT INTO roles(id, name) " +
+                        "VALUES (1, 'Administration');";
+        String SQL_INSERT_SAVE1_USER_ROLES =
+                "INSERT INTO user_role (id, user_id, role_id) " +
+                        "VALUES (1, 4, 1);";
+
         String SQL_INSERT_SAVE2 =
                 "INSERT INTO users(id, name, birthday, loginId, city, email, description) " +
                         "VALUES (7, 'SavepointB Savepointovicha Savepointov', '2014-04-04', 'savepointB', 'Tver', 'savepointB@mail.ru','Человек');";
-        String SQL_DELETE = "DELETE FROM USERS";
+
+        String SQL_DELETE_USERS = "DELETE FROM USERS";
+        String SQL_DELETE_ROLES = "DELETE FROM ROLES";
+        String SQL_DELETE_USER_ROLES = "DELETE FROM user_role";
 
         this.connection.setAutoCommit(false);
+
+        //заполняем БД консистемными данными в пользователь и его роль. Ценная работа
         PreparedStatement ps = this.connection.prepareStatement(SQL_INSERT_SAVE1);
         ps.executeUpdate();
+        ps = this.connection.prepareStatement(SQL_INSERT_SAVE1_ROLES);
+        ps.executeUpdate();
+        ps = this.connection.prepareStatement(SQL_INSERT_SAVE1_USER_ROLES);
+        ps.executeUpdate();
+
         Savepoint sp1 = this.connection.setSavepoint("SAVEPOINTA");
+
+        //Еще один INSERT
         ps = this.connection.prepareStatement(SQL_INSERT_SAVE2);
         ps.executeUpdate();
+
         Savepoint sp2 = this.connection.setSavepoint("SAVEPOINTB");
-        ps = this.connection.prepareStatement(SQL_DELETE);
+        //Случаной удалям ценную работу
+        ps = this.connection.prepareStatement(SQL_DELETE_USER_ROLES);
         ps.executeUpdate();
+        ps = this.connection.prepareStatement(SQL_DELETE_ROLES);
+        ps.executeUpdate();
+        ps = this.connection.prepareStatement(SQL_DELETE_USERS);
+        ps.executeUpdate();
+
+        //Откатываемся
         this.connection.rollback(sp1);
+        //Комитим
         this.connection.commit();
+        this.connection.setAutoCommit(true);
     }
 }
