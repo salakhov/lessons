@@ -44,7 +44,7 @@ public class Main {
             sqlTest.makeSaveTransaction();
         } catch (SQLException ex) {
             log.error(ex.getMessage());
-            ex.printStackTrace();
+            //ex.printStackTrace();
         }
     }
 

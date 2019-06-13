@@ -28,4 +28,5 @@
             <AppenderRef ref="file2" level="INFO"/>
         </Logger>
     </Loggers>
-</Configuration> 
+</Configuration>
+
