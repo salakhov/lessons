@@ -3,6 +3,7 @@ package part1.lesson16.task01;
 import org.apache.logging.log4j.core.Logger;
 
 import java.sql.*;
+import java.util.logging.LogManager;
 
 /**
  * ДЗ_16
@@ -24,8 +25,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             String url = "jdbc:postgresql://localhost:5432/inno?user=sam&password=Gfhjkm";
-            Logger log = null;
-            log.
+
             Connection cn = DriverManager.getConnection(url);
             SqlOperations sqlTest = new SqlOperations(cn);
             sqlTest.makeInsert();
