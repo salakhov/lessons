@@ -2,31 +2,28 @@
 <Configuration>
     <!-- Секция аппендеров -->
     <Appenders>
-        <!-- Файловый аппендер -->
         <File name="file" fileName="log.log">
             <PatternLayout>
-                <Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
+                <Pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %m%nw</Pattern>
             </PatternLayout>
         </File>
-        <!-- Файловый аппендер -->
-        <File name="file2" fileName="log2.log">
-            <!-- Фильтр по маркеру -->
-            <MarkerFilter marker="fileonly" onMatch="DENY" onMismatch="ACCEPT"/>
-            <PatternLayout>
-                <Pattern>%d %p %c{1.} [%t] %m %ex%n</Pattern>
-            </PatternLayout>
-        </File>
+
+        <JDBC name="databaseAppender" tableName="LOG">
+            <ConnectionFactory class="part1.lesson16.task01.ConnectionFactory" method="getDatabaseConnection" />
+            <Column name="id" literal="1" isUnicode="false" />
+            <Column name="date" isEventTimestamp="true" isUnicode="false" />
+            <Column name="log_level" pattern="%level" isUnicode="false" />
+            <Column name="message" pattern="%message" isUnicode="false" />
+            <Column name="exception" pattern="%ex{full}" isUnicode="false" />
+        </JDBC>
     </Appenders>
-    <!-- Секция логгеров -->
+
+
     <Loggers>
-        <!-- Корневой логгер -->
-        <Root level="trace">
+        <Root level="error">
             <AppenderRef ref="file" level="DEBUG"/>
+            <AppenderRef ref="databaseAppender" level="DEBUG"/>
         </Root>
-        <!-- Логгер нашего класса -->
-        <Logger name="logging.log4j.LoggingLog4j" level="info" additivity="false">
-            <AppenderRef ref="file2" level="INFO"/>
-        </Logger>
     </Loggers>
 </Configuration>
 

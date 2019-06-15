@@ -32,4 +32,12 @@ CREATE table user_role (
     FOREIGN KEY (role_id) references roles(id)
 );
 
+CREATE TABLE LOG (
+                      id INTEGER,
+                      date TIMESTAMP,
+                      log_level VARCHAR(32),
+                      message VARCHAR(4000),
+                      exception VARCHAR(255)
+);
+
 INSERT INTO users(id, name, birthday, loginId, city, email, description) VALUES (1, 'Kurikin Ivan Ivanovish', '2014-04-04', 'kurikin', 'Tver', 'kirikin@mail.ru','Человек');
