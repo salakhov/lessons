@@ -1,5 +1,8 @@
 package part1.lesson16.task01;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.core.Logger;
+
 import java.sql.*;
 
 /**
@@ -14,6 +17,7 @@ import java.sql.*;
 
 public class SqlOperations {
     private Connection connection;
+    private static Logger log = (Logger) LogManager.getLogger(SqlOperations.class);
 
     public SqlOperations(Connection connection) {
         this.connection = connection;
@@ -38,6 +42,7 @@ public class SqlOperations {
         ps.executeUpdate();
         ps = this.connection.prepareStatement(SQL_INSERT1);
         ps.executeUpdate();
+        log.info("Функция  вставки в таблицу через jdbc интерфейс выполнена успешно");
     }
 
     /**
@@ -45,6 +50,7 @@ public class SqlOperations {
      * @throws SQLException
      */
     public void makeBatchInsert() throws SQLException{
+
         String SQL_INSERT_BATCH1 =
                 "INSERT INTO users(id, name, birthday, loginId, city, email, description) " +
                         "VALUES (4, 'Batchibald Batch Onde', '2014-04-04', 'batch1', 'Tver', 'batch1@mail.ru','Человек');";
@@ -59,6 +65,7 @@ public class SqlOperations {
         st.addBatch(SQL_INSERT_BATCH2);
         st.executeBatch();
         this.connection.commit();
+        log.info("Функция  вставки в таблицу через jdbc интерфейс используя batch процесс выполнена успешно");
     }
 
     /**
@@ -66,6 +73,7 @@ public class SqlOperations {
      * @throws SQLException
      */
     public void makeParamInsert() throws SQLException {
+
         String SQL_INSERT_PARAM =
                 "INSERT INTO users(id, name, birthday, loginId, city, email, description) " +
                         "VALUES (?, ?, ?, ?, ?, ?, ?);";
@@ -80,6 +88,7 @@ public class SqlOperations {
         ps.setString(6, "ivanov@mail.ru");
         ps.setString(7, "Human");
         ps.executeUpdate();
+        log.info("Функция  вставки в таблицу через jdbc интерфейс Используя параметризированный запрос выполнена успешно");
     }
 
     /**
@@ -87,6 +96,7 @@ public class SqlOperations {
      * @throws SQLException
      */
     public void makeParamSelect() throws SQLException{
+
         String SQL_SELECT =
                 "SELECT name,loginId FROM USERS";
 
@@ -96,6 +106,7 @@ public class SqlOperations {
             System.out.println("login: "+rs.getString(2)+
                     " ssername: " +rs.getString(1));
         }
+        log.info("Функция параметризированной выборки по login_ID и name одновременно выполнена успешно");
     }
 
     /**
@@ -104,6 +115,7 @@ public class SqlOperations {
      */
 
     public void makeSaveTransaction() throws SQLException{
+
         String SQL_INSERT_SAVE1 =
                 "INSERT INTO users(id, name, birthday, loginId, city, email, description) " +
                         "VALUES (6, 'SavepointA Savepointovicha Savepointov', '2014-04-04', 'savepointA', 'Tver', 'savepointA@mail.ru','Человек');";
@@ -152,5 +164,7 @@ public class SqlOperations {
         //Комитим
         this.connection.commit();
         this.connection.setAutoCommit(true);
+
+        log.info(" Функция демонстрации работы с точками сохранения и осуществляет выполнение и откат к точке SAVPOINTB выполнена успешно");
     }
 }

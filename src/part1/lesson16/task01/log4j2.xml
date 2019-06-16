@@ -10,7 +10,7 @@
 
         <JDBC name="databaseAppender" tableName="LOG">
             <ConnectionFactory class="part1.lesson16.task01.ConnectionFactory" method="getDatabaseConnection" />
-            <Column name="id" literal="1" isUnicode="false" />
+            <Column name="id" literal="nextval('serial')" isUnicode="false" />
             <Column name="date" isEventTimestamp="true" isUnicode="false" />
             <Column name="log_level" pattern="%level" isUnicode="false" />
             <Column name="message" pattern="%message" isUnicode="false" />
@@ -20,9 +20,9 @@
 
 
     <Loggers>
-        <Root level="error">
-            <AppenderRef ref="file" level="DEBUG"/>
-            <AppenderRef ref="databaseAppender" level="DEBUG"/>
+        <Root level="trace">
+            <AppenderRef ref="file" level="INFO"/>
+            <AppenderRef ref="databaseAppender" level="TRACE"/>
         </Root>
     </Loggers>
 </Configuration>
