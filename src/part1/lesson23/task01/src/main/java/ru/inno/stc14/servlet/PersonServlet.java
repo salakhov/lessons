@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 
+/**
+ * Добавлены поля в соответствии с заданием
+ * email,phone
+ */
+
 public class PersonServlet extends HttpServlet {
     private PersonService person;
 

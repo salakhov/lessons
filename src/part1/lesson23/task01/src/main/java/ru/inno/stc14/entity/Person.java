@@ -5,6 +5,7 @@ import java.util.Objects;
 
 /**
  * Добавлены поля в соответствии с заданием
+ * email,phone
  */
 
 public class Person {
