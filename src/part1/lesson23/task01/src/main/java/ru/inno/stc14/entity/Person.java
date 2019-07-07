@@ -3,6 +3,10 @@ package ru.inno.stc14.entity;
 import java.util.Date;
 import java.util.Objects;
 
+/**
+ * Добавлены поля в соответствии с заданием
+ */
+
 public class Person {
     private int id;
     private String name;
@@ -36,7 +40,17 @@ public class Person {
 
     public String getEmail() { return email; }
 
+    /** Добавлен email
+     *
+     * @param email
+     */
+
     public void setEmail(String email) { this.email = email; }
+
+    /**
+     * Добавлен телефон
+     * @return
+     */
 
     public String getPhone() { return phone; }
 

@@ -23,13 +23,15 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public boolean addPerson(String name, String birth) throws IOException {
+    public boolean addPerson(String name, String birth,String email, String phone) throws IOException {
         if ("Feofan".equals(name)) {
             throw new IOException("Feofan is not available!");
         }
         Person person = new Person();
         person.setName(name);
         person.setBirthDate(birth);
+        person.setEmail(email);
+        person.setPhone(phone);
         return personDAO.addPerson(person);
     }
 }

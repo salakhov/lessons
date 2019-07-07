@@ -9,5 +9,5 @@ public interface PersonService {
 
     List<Person> getList();
 
-    boolean addPerson(String name, String birth) throws IOException;
+    boolean addPerson(String name, String birth,String email, String phone)  throws IOException;
 }
