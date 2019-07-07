@@ -20,13 +20,13 @@
         <input name="birth" type="text" class="form-control" id="birth" value="<jsp:getProperty name="person" property="birthDate" />">
     </div>
     <div class="form-group">
-        <label for="birth">e-mail</label>
-        <input name="birth" type="text" class="form-control" id="birth" value="<jsp:getProperty name="person" property="email" />">
+        <label for="email">e-mail</label>
+        <input name="email" type="text" class="form-control" id="email" value="<jsp:getProperty name="person" property="email" />">
     </div>
 
     <div class="form-group">
-        <label for="birth">Phone</label>
-        <input name="birth" type="text" class="form-control" id="birth" value="<jsp:getProperty name="person" property="phone" />">
+        <label for="phone">Phone</label>
+        <input name="phone" type="text" class="form-control" id="phone" value="<jsp:getProperty name="person" property="phone" />">
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

@@ -10,6 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.Connection;
 
+/**
+ * Добавлены поля в соответствии с заданием
+ * email,phone
+ */
+
 public class PersonServlet extends HttpServlet {
     private PersonService person;
 
@@ -33,7 +38,9 @@ public class PersonServlet extends HttpServlet {
         req.setCharacterEncoding("utf-8");
         String name = req.getParameter("name");
         String birth = req.getParameter("birth");
-        person.addPerson(name, birth);
+        String email = req.getParameter("email");
+        String phone = req.getParameter("phone");
+        person.addPerson(name, birth,email,phone);
 
         resp.sendRedirect(req.getContextPath() + "/person/list");
     }
